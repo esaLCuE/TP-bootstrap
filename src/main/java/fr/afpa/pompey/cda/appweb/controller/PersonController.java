@@ -29,7 +29,7 @@ public class PersonController {
     @GetMapping(value = {"/createperson"})
     public String createPerson(Model model) {
         Person person = new Person();
-        model.addAttribute("person",person);
+        model.addAttribute("person", person);
         return "createperson";
     }
 
@@ -48,11 +48,7 @@ public class PersonController {
 
     @PostMapping(value={"/saveperson"})
     public ModelAndView savePerson(@ModelAttribute Person person) {
-        Person current = null;
-        if(person.getId() != null) {
-            current = service.getPerson(person.getId());
-        }
-        service.savePerson(current);
+        service.savePerson(person);
         return new ModelAndView("redirect:/");
     }
 

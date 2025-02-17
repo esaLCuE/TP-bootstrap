@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class Person {
     private Integer id;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
 }

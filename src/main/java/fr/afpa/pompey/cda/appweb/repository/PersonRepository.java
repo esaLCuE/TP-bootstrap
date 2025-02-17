@@ -1,28 +1,27 @@
 package fr.afpa.pompey.cda.appweb.repository;
 
-import config.CustomProperties;
+
+import fr.afpa.pompey.cda.appweb.config.CustomProperties;
 import fr.afpa.pompey.cda.appweb.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component
 public class PersonRepository {
 
-    CustomProperties customProperties = new CustomProperties();
-    // TODO : ~page 50, créer avec @Autowired sans le new
+    @Autowired
+    private CustomProperties customProperties;
     
     public Iterable<Person> getPersons() {
 
-        String baseURL = customProperties.getapiUrl();
+        String baseURL = customProperties.getApiUrl();
         String getPersonsURL = baseURL + "/persons";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -39,7 +38,7 @@ public class PersonRepository {
     }
 
     public Person getPerson(int id) {
-        String baseApiUrl = customProperties.getapiUrl();
+        String baseApiUrl = customProperties.getApiUrl();
         String getPersonURL = baseApiUrl + "/person/" + id;
 
         RestTemplate restTemplate = new RestTemplate();
@@ -49,29 +48,29 @@ public class PersonRepository {
                 null,
                 Person.class
         );
-        log.debug("Get Person call"+response.getStatusCode());
+        log.debug("Get Person call "+response.getStatusCode());
         return response.getBody();
     }
 
     public Person createPerson(Person person) {
-        String baseApiUrl = customProperties.getapiUrl();
-        String createPersonURL = baseApiUrl + "/persons";
+        String baseApiUrl = customProperties.getApiUrl();
+        String createPersonsURL = baseApiUrl + "/person";
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Person> request = new HttpEntity<>(person);
         ResponseEntity<Person> response = restTemplate.exchange(
-                createPersonURL,
+                createPersonsURL,
                 HttpMethod.POST,
                 request,
                 Person.class);
-        log.debug("Create Person call"+response.getStatusCode());
+        log.debug("Create Person call "+response.getStatusCode());
 
         return response.getBody();
     }
 
     public Person updatePerson(Person person) {
-        String baseApiUrl = customProperties.getapiUrl();
-        String updatePersonURL = baseApiUrl + "/persons/" + person.getId();
+        String baseApiUrl = customProperties.getApiUrl();
+        String updatePersonURL = baseApiUrl + "/person/" + person.getId();
 
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Person> request = new HttpEntity<>(person);
@@ -81,13 +80,13 @@ public class PersonRepository {
                 request,
                 Person.class
         );
-        log.debug("Update Person call"+response.getStatusCode());
+        log.debug("Update Person call "+response.getStatusCode());
         return response.getBody();
     }
 
     public void deletePerson(int id) {
-        String baseApiUrl = customProperties.getapiUrl();
-        String deletePersonURL = baseApiUrl + "/persons/" + id;
+        String baseApiUrl = customProperties.getApiUrl();
+        String deletePersonURL = baseApiUrl + "/person/" + id;
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Void> response = restTemplate.exchange(
@@ -96,6 +95,6 @@ public class PersonRepository {
                 null,
                 Void.class
         );
-        log.debug("Delete Person call"+response.getStatusCode());
+        log.debug("Delete Person call "+response.getStatusCode());
     }
 }

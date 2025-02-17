@@ -13,7 +13,7 @@ public class PersonService {
     @Autowired
     private PersonRepository personRepository;
 
-    public Person getPerson(Integer id) {
+    public Person getPerson(int id) {
         return personRepository.getPerson(id);
     }
 
@@ -21,13 +21,13 @@ public class PersonService {
         return personRepository.getPersons();
     }
 
-    public void deletePerson(final Integer id) {
+    public void deletePerson(final int id) {
         personRepository.deletePerson(id);
     }
 
     public Person savePerson(Person person) {
         Person saved;
-        person.setLastname(person.getLastname().toUpperCase());
+        person.setLastName(person.getLastName().toUpperCase());
 
         if (person.getId() == null) {
             saved = personRepository.createPerson(person);
