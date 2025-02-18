@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.github/workflows/maven.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.github/workflows/maven.yml'
+    types: [opened, synchronize, reopened]
+
+jobs:
+  init-workflow:
+    name: init workflow
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was automatically triggered by a ${{github.event_name}} event."
+      - run: echo "This job is now running on a ${{runner.os}} server hosted by giyhub!"
+      - run: echo "The name of your branch is ${{github.ref}} and your repository is ${{github.repository}}."
