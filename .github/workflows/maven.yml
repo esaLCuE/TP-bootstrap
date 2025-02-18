@@ -34,7 +34,7 @@ jobs:
         run: sudo service mysql start
 
       - name: Creeate Database from script
-        run: mysql -u${{secrets.DB_USER}} -p${{secrets.BD_PASSWORD}} -e "source infra/mysql/dump/sparadrap.sql"
+        run: mysql -u${{secrets.DB_USER}} -p${{secrets.BD_PASSWORD}} -e "source C:\Users\USER-6\Desktop\MySQL\springboot-sql.sql"
 
       - name: Install Chrome Browser for selenium
         uses: browser-actions/setup-chrome@latest
