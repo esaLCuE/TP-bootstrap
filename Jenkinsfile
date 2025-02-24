@@ -11,7 +11,7 @@ pipeline {
         script {
           git branch: 'main',
             credentialsId: 'credentialAppWeb',
-            url = 'https://github.com/esaLCuE/TP-bootstrap.git'
+            url: 'https://github.com/esaLCuE/TP-bootstrap.git'
         }
       }
     }
