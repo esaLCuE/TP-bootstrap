@@ -5,6 +5,7 @@ pipeline {
     registry = "esalcue/webspringboot2025"
     registryCredential = "CredentialDocker"
     dockerImage = ''
+  }
   
   tools {
     maven 'maven'
