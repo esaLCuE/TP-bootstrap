@@ -20,7 +20,7 @@ pipeline {
     stage('Build Location') {
       steps {
         bat 'echo %cd%'
-	      bat 'dir'
+	bat 'dir'
       }
     }
     
