@@ -16,6 +16,14 @@ pipeline {
         cleanWs()
       }
     }
+    
+    stage('Build Location') {
+      steps {
+        bat 'echo %cd%'
+	      bat 'dir'
+      }
+    }
+    
     stage('Git Checkout') {
       steps {
         script {
