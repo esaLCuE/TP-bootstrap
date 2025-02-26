@@ -33,7 +33,7 @@ services:
             - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL = true
         
         depends_on:
-            - mysql_server
+            - db
         networks:
             - backend
             
