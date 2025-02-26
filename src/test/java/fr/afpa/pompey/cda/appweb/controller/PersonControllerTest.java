@@ -19,8 +19,7 @@ public class PersonControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Disabled
+    
     @Test
     public void getPersonsTest() throws Exception {
 
