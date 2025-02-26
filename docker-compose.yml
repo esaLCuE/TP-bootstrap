@@ -11,8 +11,8 @@ services:
         ports: 
             - "3396:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: rootdfctgjbn
-            MYSQL_DATABASE: springboot
+            - MYSQL_ROOT_PASSWORD: root
+            - MYSQL_DATABASE: springboot
         networks:
             - backend
             
