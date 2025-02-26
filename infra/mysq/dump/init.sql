@@ -1,4 +1,4 @@
-CREATE DATABASE springboot;
+CREATE DATABASE IF NOT EXISTS springboot;
 use springboot;
 
 DROP TABLE IF EXISTS `person`;
