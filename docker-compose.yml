@@ -1,8 +1,10 @@
 name: second
 
 services:
+    
     db:
         image: mysql:8.3.0
+        container_name: mysql_server
         volumes:
             - db_data:/var/lib/mysql
         restart: always
@@ -11,6 +13,47 @@ services:
             MYSQL_DATABASE: wordpressdb
             MYSQL_USER: exempleuser
             MYSQL_PASSWORD: exemplepass
+            
+    apiprojet:
+        image: esalcue/api:latest
+        container_name: apiprojet
+        restart: on-failure
+        ports:
+            - "9010:9000"
+        environment:
+            - SPRING_DATASOURCE_URL = http://jdbc:mysql://db:3306/springboot
+            
+            - SPRING_DATASOURCE_USERNAME= ${{secrets.DB_USER}}
+            - SPRING_DATASOURCE_PASSWORD=${{secrets.DB_PASSWORD}}
+
+            - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+            - SPRING_JPA_SQL = true
+            - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL = true
+        
+        depends_on:
+            - mysql_server
+        networks:
+            - backend
+            
+    webprojet:
+        image: esalcue/webspringboot2025:latest
+        container_name: webprojet
+        ports:
+            - "9090:9090"
+        depends_on:
+            - apiprojet
+        environment:
+            - FR.AFPA.POMPEY.CDA.APPWEB.URLAPI= http://localhost:9000
+        healthcheck:
+            test: curl -f http://apiproject:9000/persons || exit 1
+            interval: 10s
+            retries: 5
+            start_period: 5s
+            timeout: 10s
+        networks:
+            - backend
+
+    
     wordpress:
         depends_on:
             - db
