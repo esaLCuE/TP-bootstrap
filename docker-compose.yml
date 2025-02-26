@@ -11,10 +11,8 @@ services:
         ports: 
             - "3396:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: 
-            MYSQL_DATABASE: 
-            MYSQL_USER: exempleuser
-            MYSQL_PASSWORD: exemplepass
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: root
         networks:
             - backend
             
