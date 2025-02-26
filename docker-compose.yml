@@ -3,11 +3,12 @@ name: second
 services:
     
     db:
-        image: mysql:8.0.39
+        image: mysql:8.3.0
         container_name: mysql_server
         volumes:
             - db_data:/var/lib/mysql
         restart: always
+        ports: "3396:3306"
         environment:
             MYSQL_ROOT_PASSWORD: wordpress
             MYSQL_DATABASE: wordpressdb
