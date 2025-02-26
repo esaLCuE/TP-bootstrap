@@ -42,7 +42,7 @@ services:
         image: esalcue/webspringboot2025:latest
         container_name: webprojet
         ports:
-            - "9090:9090"
+            - "9090:9001"
         depends_on:
             - apiprojet
         environment:
