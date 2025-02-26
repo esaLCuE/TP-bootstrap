@@ -3,7 +3,7 @@ name: second
 services:
     
     db:
-        image: mysql:8.0.38
+        image: mysql:latest
         container_name: db
         volumes:
             - ./infra/mysq/data:/var/lib/mysql
