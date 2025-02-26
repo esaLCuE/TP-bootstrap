@@ -11,8 +11,8 @@ services:
         ports: 
             - "3396:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: wordpress
-            MYSQL_DATABASE: wordpressdb
+            MYSQL_ROOT_PASSWORD: 
+            MYSQL_DATABASE: 
             MYSQL_USER: exempleuser
             MYSQL_PASSWORD: exemplepass
         networks:
@@ -47,7 +47,7 @@ services:
         depends_on:
             - apiprojet
         environment:
-            - FR.AFPA.POMPEY.CDA.APPWEB.URLAPI= http://localhost:9000
+            - FR.AFPA.POMPEY.CDA.APPWEB.URLAPI= http://apiprojet:9000
         healthcheck:
             test: curl -f http://apiproject:9000/persons || exit 1
             interval: 10s
@@ -57,23 +57,6 @@ services:
         networks:
             - backend
 
-    
-    wordpress:
-        depends_on:
-            - db
-        image: wordpress:latest
-        ports:
-            - "9005:80"
-        restart: always
-        environment:
-            WORDPRESS_DB_HOST: db:3306
-            WORDPRESS_DB_USER: exempleuser
-            WORDPRESS_DB_PASSWORD: exemplepass
-            WORDPRESS_DB_NAME: wordpressdb
-        working_dir: /var/www/html
-        networks:
-            - backend
-            
     phpmyadmin:
         depends_on:
             - db
@@ -82,8 +65,8 @@ services:
             - "9080:80"
         restart: always
         environment:
-            PMA_HOST: db
-            MYSQL_ROOT_PASSWORD: wordpress
+            PMA_HOST: "db"
+            MYSQL_ROOT_PASSWORD: "root"
         networks:
             - backend
 
