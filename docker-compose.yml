@@ -13,6 +13,8 @@ services:
             MYSQL_DATABASE: wordpressdb
             MYSQL_USER: exempleuser
             MYSQL_PASSWORD: exemplepass
+        networks:
+            - backend
             
     apiprojet:
         image: esalcue/api:latest
@@ -67,6 +69,9 @@ services:
             WORDPRESS_DB_PASSWORD: exemplepass
             WORDPRESS_DB_NAME: wordpressdb
         working_dir: /var/www/html
+        networks:
+            - backend
+            
     phpmyadmin:
         depends_on:
             - db
@@ -77,6 +82,12 @@ services:
         environment:
             PMA_HOST: db
             MYSQL_ROOT_PASSWORD: wordpress
+        networks:
+            - backend
 
 volumes: 
     db_data:
+
+networks:
+    backend:
+        driver: bridge
