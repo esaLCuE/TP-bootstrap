@@ -23,10 +23,10 @@ services:
         ports:
             - "9010:9000"
         environment:
-            - SPRING_DATASOURCE_URL = jdbc:mysql://localhost:3306/springboot
+            - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/springboot
             
-            - SPRING_DATASOURCE_USERNAME= root
-            - SPRING_DATASOURCE_PASSWORD= root
+            - SPRING_DATASOURCE_USERNAME=root
+            - SPRING_DATASOURCE_PASSWORD=root
 
             - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
             - SPRING_JPA_SQL = true
